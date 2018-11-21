@@ -1,0 +1,5 @@
+node_modules
+freeverb_wasm.d.ts
+freeverb_wasm.js
+freeverb_wasm_bg.wasm
+

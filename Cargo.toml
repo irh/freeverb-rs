@@ -1,0 +1,7 @@
+[workspace]
+members = [
+  "app_gtk",
+  "clib",
+  "freeverb",
+  "wasm",
+]

@@ -1,0 +1,11 @@
+[package]
+name = "freeverb_module"
+version = "0.1.0"
+authors = ["irh <ian.r.hobson@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+audio_module = { path = "../audio_module" }
+freeverb = { path = "../freeverb" }
+num-derive = "0.2"
+num-traits = "0.2"

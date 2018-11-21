@@ -1,0 +1,11 @@
+[package]
+name = "freeverb-clib"
+version = "0.0.1"
+authors = ["Ian Hobson <ian.r.hobson@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+freeverb = { path = "../freeverb" }
+
+[lib]
+crate-type = ["staticlib"]

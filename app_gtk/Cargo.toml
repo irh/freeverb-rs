@@ -1,0 +1,13 @@
+[package]
+name = "freeverb-gtk"
+version = "0.1.0"
+authors = ["irh <ian.r.hobson@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+audio_module = { path = "../audio_module" }
+freeverb_module = { path = "../freeverb_module" }
+audio_thread_priority = "0.3"
+crossbeam-channel = "0.3"
+gtk = "0.5"
+portaudio = "0.7.0"
