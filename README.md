@@ -27,7 +27,7 @@ This contains the core implementation of Freeverb, with a simple interface.
 
 A very basic audio+GUI application that runs the `freeverb::Freeverb` processor.
 
-You will need `portaudio` and `gtk` installed on your system for this to work.
+You will need `gtk` installed on your system for this to work.
 
 `audio_module`
 

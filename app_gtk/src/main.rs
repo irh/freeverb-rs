@@ -1,12 +1,12 @@
-use audio_module::*;
-use freeverb_module::FreeverbModule;
+use {
+    audio_module::{AudioModule, Widget},
+    freeverb_module::FreeverbModule,
+    gtk::{prelude::*, Orientation, Window, WindowPosition, WindowType},
+};
 
-use gtk::prelude::*;
-use gtk::{Orientation, Window, WindowPosition, WindowType};
-
+mod audio_thread;
 mod gtk_parameter_slider;
 mod gtk_parameter_toggle;
-mod portaudio_thread;
 
 fn main() {
     run_main::<FreeverbModule>();
@@ -21,12 +21,11 @@ fn run_main<Module: AudioModule>() {
     let (command_sender, command_receiver) = crossbeam_channel::bounded(1024);
 
     let sample_rate = 44100;
-    std::thread::spawn(move || {
-        portaudio_thread::run_audio::<Module>(command_receiver, sample_rate)
-    });
+    let _audio_streams = audio_thread::start_audio::<Module>(command_receiver, sample_rate)
+        .expect("Failed to start audio");
 
     let window = Window::new(WindowType::Toplevel);
-    window.set_title("Rusty freeverb");
+    window.set_title("freeverb-rs");
     window.set_default_size(350, 300);
     window.set_position(WindowPosition::Center);
 
