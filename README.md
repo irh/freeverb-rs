@@ -11,7 +11,7 @@ Freeverb was originally written in C++ by "Jezar at Dreampoint", and was release
 
 ## About freeverb-rs
 
-This implementation of Freeverb in Rust is an almost direct conversion of the original source, created as a demonstration project for a talk I gave about Rust at the Audio Developer Conference 2018.
+This implementation of Freeverb in Rust is an almost direct conversion of the original source, created as a demonstration project for a [talk I gave about Rust at the Audio Developer Conference 2018](https://www.youtube.com/watch?v=Yom9E-67bdI).
 
 There are a couple of (intentional) differences to the original implementation:
 - delay line buffers are dynamically allocated for simplicity. This may have a performance impact, and once generic constants are available I would like to make the buffer static.
