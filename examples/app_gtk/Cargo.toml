@@ -5,9 +5,11 @@ authors = ["irh <ian.r.hobson@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-audio_module = { path = "../audio_module" }
-freeverb_module = { path = "../freeverb_module" }
+audio_module = { path = "../../src/audio_module" }
+freeverb_module = { path = "../../src/freeverb_module" }
+
 audio_thread_priority = "0.3"
+cpal = "0.12.1"
 crossbeam-channel = "0.3"
 gtk = "0.5"
-portaudio = "0.7.0"
+ringbuf = "0.2.2"

@@ -3,11 +3,17 @@ use wasm_bindgen::prelude::*;
 #[wasm_bindgen]
 pub struct Freeverb(freeverb::Freeverb);
 
+impl Default for Freeverb {
+    fn default() -> Self {
+        Self(freeverb::Freeverb::new(44100))
+    }
+}
+
 #[wasm_bindgen]
 impl Freeverb {
     #[wasm_bindgen(constructor)]
     pub fn new() -> Self {
-        Freeverb(freeverb::Freeverb::new(44100))
+        Self::default()
     }
 
     pub fn process(

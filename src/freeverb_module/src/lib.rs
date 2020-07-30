@@ -59,7 +59,7 @@ impl AudioProcessor for FreeverbProcessor {
     fn process_stereo(&mut self, input: &[f32], output: &mut [f32]) {
         assert!(input.len() == output.len());
 
-        for i in (0..input.len()).into_iter().step_by(2) {
+        for i in (0..input.len()).step_by(2) {
             let result = self.freeverb.tick((input[i] as f64, input[i + 1] as f64));
 
             output[i] = result.0 as f32;
