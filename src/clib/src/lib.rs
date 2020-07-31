@@ -1,4 +1,3 @@
-extern crate freeverb;
 pub use freeverb::Freeverb;
 
 /// Create a Freeverb instance with a given sample rate

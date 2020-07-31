@@ -1,10 +1,14 @@
 #[macro_use]
 extern crate num_derive;
 
-use audio_module::*;
-use freeverb::Freeverb;
-
-use num_traits::FromPrimitive;
+use {
+    audio_module::{
+        percent_string_converter, AudioModule, AudioProcessor, BoolParameter, Command,
+        CommandHandler, FloatParameter, Parameter, ParameterProvider,
+    },
+    freeverb::Freeverb,
+    num_traits::FromPrimitive,
+};
 
 #[derive(FromPrimitive)]
 pub enum Parameters {
@@ -22,8 +26,8 @@ pub struct FreeverbProcessor {
 
 impl FreeverbProcessor {
     fn new(sample_rate: usize) -> Self {
-        Self{
-            freeverb: Freeverb::new(sample_rate)
+        Self {
+            freeverb: Freeverb::new(sample_rate),
         }
     }
 }

@@ -1,4 +1,4 @@
-use super::{all_pass::AllPass, comb::Comb};
+use crate::{all_pass::AllPass, comb::Comb};
 
 const FIXED_GAIN: f64 = 0.015;
 
