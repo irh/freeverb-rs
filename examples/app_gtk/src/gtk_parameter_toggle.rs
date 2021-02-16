@@ -1,7 +1,8 @@
-use audio_module::{Command, Parameter};
-
-use gtk::prelude::*;
-use gtk::{Orientation, ToggleButton};
+use {
+    audio_module::{Command, Parameter},
+    gtk::prelude::*,
+    gtk::{Orientation, ToggleButton},
+};
 
 pub fn make_toggle(
     parameter: Box<dyn Parameter>,

@@ -1,4 +1,4 @@
-use super::delay_line::DelayLine;
+use crate::delay_line::DelayLine;
 
 pub struct Comb {
     delay_line: DelayLine,

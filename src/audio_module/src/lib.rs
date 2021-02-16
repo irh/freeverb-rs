@@ -1,10 +1,8 @@
-pub mod parameter;
-pub mod string_converter;
-pub mod value_converter;
+mod parameter;
+mod string_converter;
+mod value_converter;
 
-pub use self::parameter::*;
-pub use self::string_converter::*;
-pub use self::value_converter::*;
+pub use {parameter::*, string_converter::*, value_converter::*};
 
 pub enum Command {
     SetParameter(usize, f32),

@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "wasm": "./build-wasm.sh",
     "serve": "webpack-dev-server"
   },
   "devDependencies": {

@@ -1,7 +1,8 @@
-use audio_module::{Command, Parameter};
-
-use gtk::prelude::*;
-use gtk::{Alignment, Label, Orientation, PositionType, Scale};
+use {
+    audio_module::{Command, Parameter},
+    gtk::prelude::*,
+    gtk::{Alignment, Label, Orientation, PositionType, Scale},
+};
 
 pub fn make_slider(
     parameter: Box<dyn Parameter>,

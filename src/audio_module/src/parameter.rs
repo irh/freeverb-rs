@@ -1,4 +1,11 @@
-use super::*;
+use crate::{
+    string_converter::{
+        DefaultStringConverter, FloatStringConverter, PercentStringConverter, StringConverter,
+    },
+    value_converter::{
+        DefaultValueConverter, LinearValueConverter, LogValueConverter, ValueConverter,
+    },
+};
 
 pub enum Widget {
     Slider,
