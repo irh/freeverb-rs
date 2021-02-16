@@ -1,8 +1,13 @@
-Generally following [wasm-bindgen tutorial](https://rustwasm.github.io/wasm-bindgen/basic-usage.html).
+This is an example of taking the freeverb library and making it available as
+[WebAssembly](https://webassembly.org).
+
+The approach taken is mostly following this
+[wasm-bindgen tutorial](https://rustwasm.github.io/wasm-bindgen/basic-usage.html).
+
+To try out the example in a browser, `cd` into this folder, and run:
 
 ```
-cargo build --target=wasm32-unknown-unknown --release
-wasm-bindgen target/wasm32-unknown-unknown/release/synthesizer_io_wasm.wasm --out-dir .
 npm install
+npm run wasm
 npm run serve
 ```
