@@ -54,7 +54,7 @@ pub fn start_audio<Module: AudioModule>(
                     processor.handle_command(command);
                 }
 
-                processor.process_stereo(&data, &mut process_buffer);
+                processor.process_stereo(data, &mut process_buffer);
 
                 to_output.push_slice(&process_buffer);
             },
