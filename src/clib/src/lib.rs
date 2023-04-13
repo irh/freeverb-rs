@@ -18,7 +18,7 @@ pub extern "C" fn create(sample_rate: usize) -> *mut Freeverb {
 pub unsafe extern "C" fn destroy(freeverb: *mut Freeverb) {
     if !freeverb.is_null() {
         unsafe {
-            Box::from_raw(freeverb);
+            let _ = Box::from_raw(freeverb);
         }
     } else {
         panic!("")
