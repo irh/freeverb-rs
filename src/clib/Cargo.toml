@@ -2,7 +2,7 @@
 name = "freeverb-clib"
 version = "0.0.1"
 authors = ["Ian Hobson <ian.r.hobson@gmail.com>"]
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 freeverb = { path = "../freeverb" }
