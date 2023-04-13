@@ -15,7 +15,7 @@ pub extern "C" fn create(sample_rate: usize) -> *mut Freeverb {
 ///
 /// The instance must have been previously created using `create()`.
 #[no_mangle]
-pub extern "C" fn destroy(freeverb: *mut Freeverb) {
+pub unsafe extern "C" fn destroy(freeverb: *mut Freeverb) {
     if !freeverb.is_null() {
         unsafe {
             Box::from_raw(freeverb);
