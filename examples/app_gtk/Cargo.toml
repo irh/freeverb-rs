@@ -11,5 +11,5 @@ freeverb_module = { path = "../../src/freeverb_module" }
 audio_thread_priority = "0.3"
 cpal = "0.13.1"
 crossbeam-channel = "0.3"
-gtk = "0.5"
+gtk = "0.17.1"
 ringbuf = "0.2.2"
