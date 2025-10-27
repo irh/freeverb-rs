@@ -1,7 +1,7 @@
 use {
     audio_module::{Command, Parameter},
     gtk::prelude::*,
-    gtk::{Alignment, Label, Orientation, PositionType, Scale},
+    gtk::{Label, Orientation, PositionType, Scale},
 };
 
 pub fn make_slider(
@@ -11,13 +11,10 @@ pub fn make_slider(
 ) -> gtk::Box {
     let container = gtk::Box::new(Orientation::Vertical, 2);
 
-    let padding_top = Alignment::new(0.0, 0.0, 1.0, 1.0);
-    container.pack_start(&padding_top, false, false, 2);
-
-    let label = Label::new(parameter.name().as_str());
+    let label = Label::new(Some(parameter.name().as_str()));
     container.pack_start(&label, false, false, 0);
 
-    let scale = Scale::new_with_range(Orientation::Vertical, 0.0, 1.0, 0.01);
+    let scale = Scale::with_range(Orientation::Vertical, 0.0, 1.0, 0.01);
     scale.set_inverted(true);
     scale.set_value_pos(PositionType::Bottom);
 
@@ -31,12 +28,9 @@ pub fn make_slider(
 
     container.pack_start(&scale, true, true, 0);
 
-    let padding_bottom = Alignment::new(0.0, 0.0, 1.0, 1.0);
-    container.pack_start(&padding_bottom, false, false, 2);
-
     scale.connect_value_changed(move |scale| {
         command_sender
-            .send(Command::SetParameter(id, scale.get_value() as f32))
+            .send(Command::SetParameter(id, scale.value() as f32))
             .unwrap();
     });
 

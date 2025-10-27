@@ -8,8 +8,8 @@ edition = { workspace = true }
 audio_module = { path = "../../src/audio_module" }
 freeverb_module = { path = "../../src/freeverb_module" }
 
-audio_thread_priority = "0.3"
-cpal = "0.13.1"
+audio_thread_priority = "0.34.0"
+cpal = "0.16.0"
 crossbeam-channel = "0.3"
-gtk = "0.5"
-ringbuf = "0.2.2"
+gtk = "0.18.2"
+ringbuf = "0.4.8"

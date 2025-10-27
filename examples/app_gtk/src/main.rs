@@ -1,7 +1,7 @@
 use {
     audio_module::{AudioModule, Widget},
     freeverb_module::FreeverbModule,
-    gtk::{prelude::*, Orientation, Window, WindowPosition, WindowType},
+    gtk::{glib::Propagation, prelude::*, Orientation, Window, WindowPosition, WindowType},
 };
 
 mod audio_thread;
@@ -31,7 +31,7 @@ fn run_main<Module: AudioModule>() {
 
     window.connect_delete_event(|_, _| {
         gtk::main_quit();
-        Inhibit(false)
+        Propagation::Proceed
     });
 
     let container = gtk::Box::new(Orientation::Horizontal, 4);
