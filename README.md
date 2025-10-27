@@ -7,7 +7,7 @@ A Rust implementation of the Freeverb algorithm.
 Freeverb was originally written in C++ by "Jezar at Dreampoint", and was released into the public domain in June 2000. It is now widely used in various incarnations in multiple software packages.
 
 - [Analysis of the Freeverb algorithm](https://ccrma.stanford.edu/~jos/pasp/Freeverb.html)
-- [More information and a link to original C++ source](http://freeverb3vst.osdn.jp/sites.shtml)
+- [More information and a link to original C++ source](https://freeverb3-vst.sourceforge.io/sites.shtml)
 
 ## About freeverb-rs
 
