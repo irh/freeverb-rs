@@ -1,7 +1,15 @@
 [workspace]
+resolver = "2"
 members = [
   "src/clib",
   "src/freeverb",
   "examples/app_gtk",
   "examples/wasm",
 ]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["irh <ian.r.hobson@gmail.com>"]
+license = "MIT"
+readme = "README.md"

@@ -1,8 +1,8 @@
 [package]
 name = "freeverb-gtk"
-version = "0.1.0"
-authors = ["irh <ian.r.hobson@gmail.com>"]
-edition = "2021"
+version = { workspace = true }
+authors = { workspace = true }
+edition = { workspace = true }
 
 [dependencies]
 audio_module = { path = "../../src/audio_module" }

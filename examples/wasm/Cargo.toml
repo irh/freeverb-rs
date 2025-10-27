@@ -1,12 +1,12 @@
 [package]
 name = "freeverb-wasm"
-version = "0.0.1"
-authors = ["Ian Hobson <ian.r.hobson@gmail.com>"]
-edition = "2021"
+version = { workspace = true }
+authors = { workspace = true }
+edition = { workspace = true }
 
 [dependencies]
 freeverb = { path = "../../src/freeverb" }
-wasm-bindgen = "0.2.70"
+wasm-bindgen = "0.2.104"
 
 [lib]
 crate-type = ["cdylib"]

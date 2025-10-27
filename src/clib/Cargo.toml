@@ -1,8 +1,8 @@
 [package]
 name = "freeverb-clib"
-version = "0.0.1"
-authors = ["Ian Hobson <ian.r.hobson@gmail.com>"]
-edition = "2021"
+version = { workspace = true }
+authors = { workspace = true }
+edition = { workspace = true }
 
 [dependencies]
 freeverb = { path = "../freeverb" }
