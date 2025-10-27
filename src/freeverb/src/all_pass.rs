@@ -1,22 +1,22 @@
-use crate::delay_line::DelayLine;
+use crate::{delay_line::DelayLine, float::Float};
 
-pub struct AllPass {
-    delay_line: DelayLine,
+pub struct AllPass<T> {
+    delay_line: DelayLine<T>,
 }
 
-impl AllPass {
+impl<T: Float> AllPass<T> {
     pub fn new(delay_length: usize) -> Self {
         Self {
             delay_line: DelayLine::new(delay_length),
         }
     }
 
-    pub fn tick(&mut self, input: f64) -> f64 {
+    pub fn tick(&mut self, input: T) -> T {
         let delayed = self.delay_line.read();
         let output = -input + delayed;
 
         // in the original version of freeverb this is a member which is never modified
-        let feedback = 0.5;
+        let feedback = T::from(0.5);
 
         self.delay_line
             .write_and_advance(input + delayed * feedback);

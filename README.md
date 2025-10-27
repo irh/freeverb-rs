@@ -13,9 +13,7 @@ Freeverb was originally written in C++ by "Jezar at Dreampoint", and was release
 
 This implementation of Freeverb in Rust is an almost direct conversion of the original source, created as a demonstration project for a [talk I gave about Rust at the Audio Developer Conference 2018](https://www.youtube.com/watch?v=Yom9E-67bdI). The code has been updated since then, so if you want to follow along with the talk then take a look at the `adc-2018` branch.
 
-There are a couple of (intentional) differences to the original implementation:
-- delay line buffers are dynamically allocated for simplicity. This may have a performance impact, and once generic constants are available I would like to make the buffer static.
-- 64 bit processing is used internally whereas the original is 32 bit. I might make the sample type configurable at some point, but for now 64 bit processing seemed like a sensible default.
+A difference from the original implementation is that delay line buffers are dynamically allocated so that lengths can be adjusted for sample rates other than 44.1kHz.
 
 ## Repo structure
 

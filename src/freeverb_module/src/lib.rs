@@ -3,10 +3,10 @@ extern crate num_derive;
 
 use {
     audio_module::{
-        percent_string_converter, AudioModule, AudioProcessor, BoolParameter, Command,
-        CommandHandler, FloatParameter, Parameter, ParameterProvider,
+        AudioModule, AudioProcessor, BoolParameter, Command, CommandHandler, FloatParameter,
+        Parameter, ParameterProvider, percent_string_converter,
     },
-    freeverb::Freeverb,
+    freeverb::{Float, Freeverb},
     num_traits::FromPrimitive,
 };
 
@@ -20,8 +20,8 @@ pub enum Parameters {
     Wet,
 }
 
-pub struct FreeverbProcessor {
-    freeverb: Freeverb,
+pub struct FreeverbProcessor<T: Float = f64> {
+    freeverb: Freeverb<T>,
 }
 
 impl FreeverbProcessor {
@@ -32,42 +32,42 @@ impl FreeverbProcessor {
     }
 }
 
-impl CommandHandler for FreeverbProcessor {
+impl<T: Float> CommandHandler for FreeverbProcessor<T> {
     fn handle_command(&mut self, command: Command) {
         match command {
             Command::SetParameter(id, value) => match Parameters::from_usize(id).unwrap() {
                 Parameters::Dampening => {
-                    self.freeverb.set_dampening(value as f64);
+                    self.freeverb.set_dampening(value.into());
                 }
                 Parameters::Width => {
-                    self.freeverb.set_width(value as f64);
+                    self.freeverb.set_width(value.into());
                 }
                 Parameters::RoomSize => {
-                    self.freeverb.set_room_size(value as f64);
+                    self.freeverb.set_room_size(value.into());
                 }
                 Parameters::Freeze => {
                     self.freeverb.set_freeze(value != 0.0);
                 }
                 Parameters::Dry => {
-                    self.freeverb.set_dry(value as f64);
+                    self.freeverb.set_dry(value.into());
                 }
                 Parameters::Wet => {
-                    self.freeverb.set_wet(value as f64);
+                    self.freeverb.set_wet(value.into());
                 }
             },
         }
     }
 }
 
-impl AudioProcessor for FreeverbProcessor {
+impl<T: Float> AudioProcessor for FreeverbProcessor<T> {
     fn process_stereo(&mut self, input: &[f32], output: &mut [f32]) {
         assert!(input.len() == output.len());
 
         for i in (0..input.len()).step_by(2) {
-            let result = self.freeverb.tick((input[i] as f64, input[i + 1] as f64));
+            let result = self.freeverb.tick((input[i].into(), input[i + 1].into()));
 
-            output[i] = result.0 as f32;
-            output[i + 1] = result.1 as f32;
+            output[i] = result.0.to_f32();
+            output[i + 1] = result.1.to_f32();
         }
     }
 }

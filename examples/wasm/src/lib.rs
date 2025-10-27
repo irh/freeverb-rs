@@ -1,7 +1,7 @@
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
-pub struct Freeverb(freeverb::Freeverb);
+pub struct Freeverb(freeverb::Freeverb<f64>);
 
 impl Default for Freeverb {
     fn default() -> Self {

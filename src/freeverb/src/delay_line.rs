@@ -1,21 +1,23 @@
-pub struct DelayLine {
-    buffer: Vec<f64>,
+use crate::float::Float;
+
+pub struct DelayLine<T> {
+    buffer: Vec<T>,
     index: usize,
 }
 
-impl DelayLine {
+impl<T: Float> DelayLine<T> {
     pub fn new(length: usize) -> Self {
         Self {
-            buffer: vec![0.0; length],
+            buffer: vec![T::from(0.0); length],
             index: 0,
         }
     }
 
-    pub fn read(&self) -> f64 {
+    pub fn read(&self) -> T {
         self.buffer[self.index]
     }
 
-    pub fn write_and_advance(&mut self, value: f64) {
+    pub fn write_and_advance(&mut self, value: T) {
         self.buffer[self.index] = value;
 
         if self.index == self.buffer.len() - 1 {
@@ -35,10 +37,10 @@ mod tests {
                 let mut line = super::DelayLine::new($length);
                 for i in 0..$length {
                     assert_eq!(line.read(), 0.0);
-                    line.write_and_advance(i as f64);
+                    line.write_and_advance(i as f32);
                 }
                 for i in 0..$length {
-                    assert_eq!(line.read(), i as f64);
+                    assert_eq!(line.read(), i as f32);
                     line.write_and_advance(0.0);
                 }
             }
