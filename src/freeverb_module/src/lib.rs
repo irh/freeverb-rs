@@ -84,7 +84,7 @@ impl AudioModule for FreeverbModule {
 
 impl ParameterProvider for FreeverbModule {
     fn parameter_count() -> usize {
-        (0..usize::max_value())
+        (0..usize::MAX)
             .take_while(|&x| Parameters::from_usize(x).is_some())
             .count()
     }
