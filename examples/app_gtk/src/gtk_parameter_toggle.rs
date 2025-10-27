@@ -1,7 +1,6 @@
 use {
     audio_module::{Command, Parameter},
-    gtk::prelude::*,
-    gtk::{Orientation, ToggleButton},
+    gtk::{prelude::*, Align, Orientation, ToggleButton},
 };
 
 pub fn make_toggle(
@@ -20,7 +19,13 @@ pub fn make_toggle(
             .unwrap();
     });
 
-    let container = gtk::Box::new(Orientation::Vertical, 2);
-    container.pack_start(&button, true, false, 0);
+    let container = gtk::Box::builder()
+        .orientation(Orientation::Vertical)
+        .spacing(2)
+        .baseline_position(gtk::BaselinePosition::Center)
+        // .vexpand(true)
+        .valign(Align::Center)
+        .build();
+    container.append(&button);
     container
 }

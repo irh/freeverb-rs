@@ -1,7 +1,7 @@
 use {
     audio_module::{AudioModule, Widget},
     freeverb_module::FreeverbModule,
-    gtk::{glib::Propagation, prelude::*, Orientation, Window, WindowPosition, WindowType},
+    gtk::{prelude::*, Application, ApplicationWindow, Orientation},
 };
 
 mod audio_thread;
@@ -24,32 +24,43 @@ fn run_main<Module: AudioModule>() {
     let _audio_streams = audio_thread::start_audio::<Module>(command_receiver, sample_rate)
         .expect("Failed to start audio");
 
-    let window = Window::new(WindowType::Toplevel);
-    window.set_title("freeverb-rs");
-    window.set_default_size(350, 300);
-    window.set_position(WindowPosition::Center);
+    let app = Application::builder()
+        .application_id("org.example.freeverb-rs")
+        .build();
 
-    window.connect_delete_event(|_, _| {
-        gtk::main_quit();
-        Propagation::Proceed
+    app.connect_activate(move |app| {
+        let window = ApplicationWindow::builder()
+            .application(app)
+            .default_width(350)
+            .default_height(300)
+            .resizable(false)
+            .title("freeverb-rs")
+            .build();
+
+        let widgets = gtk::Box::builder()
+            .orientation(Orientation::Horizontal)
+            .spacing(4)
+            .height_request(200)
+            .vexpand(false)
+            .build();
+
+        for id in 0..Module::parameter_count() {
+            let parameter = Module::parameter(id);
+            let widget = match parameter.widget() {
+                Widget::Slider => {
+                    gtk_parameter_slider::make_slider(parameter, id, command_sender.clone())
+                }
+                Widget::Button => {
+                    gtk_parameter_toggle::make_toggle(parameter, id, command_sender.clone())
+                }
+            };
+            widgets.append(&widget);
+        }
+
+        window.set_child(Some(&widgets));
+
+        window.present();
     });
 
-    let container = gtk::Box::new(Orientation::Horizontal, 4);
-    window.add(&container);
-
-    for id in 0..Module::parameter_count() {
-        let parameter = Module::parameter(id);
-        let widget = match parameter.widget() {
-            Widget::Slider => {
-                gtk_parameter_slider::make_slider(parameter, id, command_sender.clone())
-            }
-            Widget::Button => {
-                gtk_parameter_toggle::make_toggle(parameter, id, command_sender.clone())
-            }
-        };
-        container.pack_start(&widget, false, true, 5);
-    }
-
-    window.show_all();
-    gtk::main();
+    app.run();
 }

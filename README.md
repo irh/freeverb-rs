@@ -39,7 +39,7 @@ A static library that provides C bindings to the `freeverb::Freeverb` processor,
 
 A very basic audio+GUI application that runs the `freeverb::Freeverb` processor.
 
-You will need `gtk` installed on your system for this to work.
+You will need `gtk4` installed on your system for this to work.
 
 `examples/app_juce`
 
