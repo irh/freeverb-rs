@@ -1,40 +1,4 @@
-use crate::{all_pass::AllPass, comb::Comb, float::Float};
-
-const FIXED_GAIN: f32 = 0.015;
-
-const SCALE_WET: f32 = 3.0;
-const SCALE_DAMPENING: f32 = 0.4;
-
-const SCALE_ROOM: f32 = 0.28;
-const OFFSET_ROOM: f32 = 0.7;
-
-const STEREO_SPREAD: usize = 23;
-
-const COMB_TUNING_L1: usize = 1116;
-const COMB_TUNING_R1: usize = 1116 + STEREO_SPREAD;
-const COMB_TUNING_L2: usize = 1188;
-const COMB_TUNING_R2: usize = 1188 + STEREO_SPREAD;
-const COMB_TUNING_L3: usize = 1277;
-const COMB_TUNING_R3: usize = 1277 + STEREO_SPREAD;
-const COMB_TUNING_L4: usize = 1356;
-const COMB_TUNING_R4: usize = 1356 + STEREO_SPREAD;
-const COMB_TUNING_L5: usize = 1422;
-const COMB_TUNING_R5: usize = 1422 + STEREO_SPREAD;
-const COMB_TUNING_L6: usize = 1491;
-const COMB_TUNING_R6: usize = 1491 + STEREO_SPREAD;
-const COMB_TUNING_L7: usize = 1557;
-const COMB_TUNING_R7: usize = 1557 + STEREO_SPREAD;
-const COMB_TUNING_L8: usize = 1617;
-const COMB_TUNING_R8: usize = 1617 + STEREO_SPREAD;
-
-const ALLPASS_TUNING_L1: usize = 556;
-const ALLPASS_TUNING_R1: usize = 556 + STEREO_SPREAD;
-const ALLPASS_TUNING_L2: usize = 441;
-const ALLPASS_TUNING_R2: usize = 441 + STEREO_SPREAD;
-const ALLPASS_TUNING_L3: usize = 341;
-const ALLPASS_TUNING_R3: usize = 341 + STEREO_SPREAD;
-const ALLPASS_TUNING_L4: usize = 225;
-const ALLPASS_TUNING_R4: usize = 225 + STEREO_SPREAD;
+use crate::{all_pass::AllPass, comb::Comb, float::Float, tuning::*};
 
 pub struct Freeverb<T: Float = f64> {
     combs: [(Comb<T>, Comb<T>); 8],
