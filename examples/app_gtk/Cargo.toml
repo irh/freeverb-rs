@@ -10,6 +10,6 @@ freeverb_module = { path = "../../crates/freeverb_module" }
 
 audio_thread_priority = "0.34.0"
 cpal = "0.16.0"
-crossbeam-channel = "0.3"
+crossbeam-channel = "0.5.15"
 gtk = { version = "0.10.1", package = "gtk4", features = ["v4_12"] }
 ringbuf = "0.4.8"
