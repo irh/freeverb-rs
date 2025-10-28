@@ -1,6 +1,6 @@
 use {
     audio_module::{Command, Parameter},
-    gtk::{prelude::*, Align, Orientation, ToggleButton},
+    gtk::{Align, Orientation, ToggleButton, prelude::*},
 };
 
 pub fn make_toggle(

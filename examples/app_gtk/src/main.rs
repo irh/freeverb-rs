@@ -1,7 +1,7 @@
 use {
     audio_module::{AudioModule, Widget},
     freeverb_module::FreeverbModule,
-    gtk::{prelude::*, Application, ApplicationWindow, Orientation},
+    gtk::{Application, ApplicationWindow, Orientation, prelude::*},
 };
 
 mod audio_thread;

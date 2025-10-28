@@ -1,6 +1,6 @@
 use {
     audio_module::{Command, Parameter},
-    gtk::{prelude::*, Label, Orientation, PositionType, Scale},
+    gtk::{Label, Orientation, PositionType, Scale, prelude::*},
 };
 
 pub fn make_slider(

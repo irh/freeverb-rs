@@ -2,8 +2,8 @@ use {
     audio_module::{AudioModule, AudioProcessor, Command, CommandHandler},
     cpal::traits::{DeviceTrait, HostTrait, StreamTrait},
     ringbuf::{
-        traits::{Consumer, Producer, Split},
         HeapRb,
+        traits::{Consumer, Producer, Split},
     },
 };
 

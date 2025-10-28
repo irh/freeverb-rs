@@ -1,5 +1,9 @@
 use crate::{all_pass::AllPass, comb::Comb, float::Float, tuning::*};
 
+/// A processor for the Freeverb reverb algorithm.
+///
+/// 64-bit processing is enabled by default.
+/// 32-bit processing can be optionally enabled by using `f32` as the generic `T` parameter.
 pub struct Freeverb<T: Float = f64> {
     combs: [(Comb<T>, Comb<T>); 8],
     allpasses: [(AllPass<T>, AllPass<T>); 4],
@@ -14,6 +18,12 @@ pub struct Freeverb<T: Float = f64> {
 }
 
 impl<T: Float> Freeverb<T> {
+    /// Produces a new processor with the given sample rate.
+    ///
+    /// The algorithm's tuning constants were designed for a sample rate of 44.1kHz,
+    /// with a note that they will 'probably be OK' for 48kHz, but would require scaling for other
+    /// sample rates. In this implementation the constants are scaled when using any sample rate,
+    /// including 48kHz.
     pub fn new(sr: usize) -> Self {
         let mut freeverb = Freeverb::<T> {
             combs: [
@@ -87,6 +97,11 @@ impl<T: Float> Freeverb<T> {
         freeverb
     }
 
+    /// Processes a single pair of values.
+    ///
+    /// The pair's values are the left/right channels of a single processing frame.
+    ///
+    /// To process a buffer of frames this function should be called repeatedly.
     pub fn tick(&mut self, input: (T, T)) -> (T, T) {
         let input_mixed = (input.0 + input.1) * T::from(FIXED_GAIN) * self.input_gain;
 
@@ -108,24 +123,53 @@ impl<T: Float> Freeverb<T> {
         )
     }
 
+    /// Sets the processors dampening value.
+    ///
+    /// The value should be in the range `0..=1`.
     pub fn set_dampening(&mut self, value: T) {
         self.dampening = value * T::from(SCALE_DAMPENING);
         self.update_combs();
     }
 
+    /// Enables or disables the reverb's 'freeze' feature.
     pub fn set_freeze(&mut self, frozen: bool) {
         self.frozen = frozen;
         self.update_combs();
     }
 
+    /// Sets the amount of the 'dry' signal to include in the processor's output.
+    ///
+    /// The dry signal is the unmodified input, without any of the reverb's output.
+    ///
+    /// The value should be in the range `0..=1`.
+    pub fn set_dry(&mut self, value: T) {
+        self.dry = value;
+    }
+
+    /// Sets the amount of the 'wet' signal to include in the processor's output.
+    ///
+    /// The wet signal is the reverb's output, without any of the unmodified input.
+    ///
+    /// The value should be in the range `0..=1`.
     pub fn set_wet(&mut self, value: T) {
         self.wet = value * T::from(SCALE_WET);
         self.update_wet_gains();
     }
 
+    /// Sets the processor's stereo width.
+    ///
+    /// The value should be in the range `0..=1`.
     pub fn set_width(&mut self, value: T) {
         self.width = value;
         self.update_wet_gains();
+    }
+
+    /// Sets the processor's 'room size'.
+    ///
+    /// The value should be in the range `0..=1`.
+    pub fn set_room_size(&mut self, value: T) {
+        self.room_size = value * T::from(SCALE_ROOM) + T::from(OFFSET_ROOM);
+        self.update_combs();
     }
 
     fn update_wet_gains(&mut self) {
@@ -138,11 +182,6 @@ impl<T: Float> Freeverb<T> {
     fn set_frozen(&mut self, frozen: bool) {
         self.frozen = frozen;
         self.input_gain = if frozen { T::from(0.0) } else { T::from(1.0) };
-        self.update_combs();
-    }
-
-    pub fn set_room_size(&mut self, value: T) {
-        self.room_size = value * T::from(SCALE_ROOM) + T::from(OFFSET_ROOM);
         self.update_combs();
     }
 
@@ -160,10 +199,6 @@ impl<T: Float> Freeverb<T> {
             combs.0.set_dampening(dampening);
             combs.1.set_dampening(dampening);
         }
-    }
-
-    pub fn set_dry(&mut self, value: T) {
-        self.dry = value;
     }
 }
 
