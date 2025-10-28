@@ -1,0 +1,5 @@
+# .git-blame-ignore-revs
+
+# Rename /src -> /crates
+990a498e2d963d18ce8cfa675674fa8c4173295e
+
