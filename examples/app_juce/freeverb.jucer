@@ -11,7 +11,7 @@
   </MAINGROUP>
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX" externalLibraries="freeverb_clib"
-      extraCompilerFlags="-I../../../clib -I/usr/local/include" prebuildCommand="export PATH=&quot;$HOME/.cargo/bin:$PATH&quot;&#10;cd ../../../../src/clib/&#10;./build.sh"
+      extraCompilerFlags="-I../../../clib -I/usr/local/include" prebuildCommand="export PATH=&quot;$HOME/.cargo/bin:$PATH&quot;&#10;cd ../../../../crates/clib/&#10;./build.sh"
       extraLinkerFlags="-L../../../../target/release">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug"/>

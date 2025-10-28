@@ -5,8 +5,8 @@ authors = { workspace = true }
 edition = { workspace = true }
 
 [dependencies]
-audio_module = { path = "../../src/audio_module" }
-freeverb_module = { path = "../../src/freeverb_module" }
+audio_module = { path = "../../crates/audio_module" }
+freeverb_module = { path = "../../crates/freeverb_module" }
 
 audio_thread_priority = "0.34.0"
 cpal = "0.16.0"

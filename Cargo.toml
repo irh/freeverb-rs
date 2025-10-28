@@ -1,8 +1,7 @@
 [workspace]
 resolver = "2"
 members = [
-  "src/clib",
-  "src/freeverb",
+  "crates/*",
   "examples/app_gtk",
   "examples/wasm",
 ]
