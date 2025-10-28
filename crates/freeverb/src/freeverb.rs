@@ -88,8 +88,8 @@ impl<T: Float> Freeverb<T> {
             frozen: false,
         };
 
-        freeverb.set_wet(T::from(1.0));
-        freeverb.set_width(T::from(0.5));
+        freeverb.set_wet(T::from(1.0) / T::from(SCALE_WET));
+        freeverb.set_width(T::from(1.0));
         freeverb.set_dampening(T::from(0.5));
         freeverb.set_room_size(T::from(0.5));
         freeverb.set_frozen(false);
@@ -132,6 +132,8 @@ impl<T: Float> Freeverb<T> {
     }
 
     /// Enables or disables the reverb's 'freeze' feature.
+    ///
+    /// This is called `set_mode` in the original implementation.
     pub fn set_freeze(&mut self, frozen: bool) {
         self.frozen = frozen;
         self.update_combs();
