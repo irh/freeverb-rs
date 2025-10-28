@@ -210,13 +210,57 @@ fn adjust_length(length: usize, sr: usize) -> usize {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+
     #[test]
-    fn ticking_does_something() {
-        let mut freeverb = super::Freeverb::new(44100);
-        assert_eq!(freeverb.tick((1.0, 1.0)), (0.0, 0.0));
-        for _ in 0..super::COMB_TUNING_R8 * 2 {
-            freeverb.tick((0.0, 0.0));
+    fn check_adjust_length() {
+        assert_eq!(adjust_length(1000, 44100), 1000);
+        assert_eq!(adjust_length(100, 22050), 50);
+        assert_eq!(adjust_length(2000, 88200), 4000);
+        assert_eq!(adjust_length(4000, 96000), 8707);
+    }
+
+    #[test]
+    fn check_output() {
+        // Validate the processor's output against reference values take from the original
+        // implementation.
+        let mut freeverb = Freeverb::<f32>::new(44100);
+
+        // Pass in the delta function.
+        let delta = (1.0, 1.0);
+        let silence = (0.0, 0.0);
+        assert_eq!(freeverb.tick(delta), silence);
+
+        // Process 3000 frames in total.
+        for _ in 0..2999 {
+            freeverb.tick(silence);
         }
-        assert_ne!(freeverb.tick((0.0, 0.0)), (0.0, 0.0));
+
+        // Check that the output is within a small difference of the reference
+        check_almost_equal(freeverb.tick(silence), (-0.0000064512, -0.0149999978));
+        check_almost_equal(freeverb.tick(silence), (0.0074987095, 0.0023400011));
+        check_almost_equal(freeverb.tick(silence), (0.0018747419, -0.0049695000));
+        check_almost_equal(freeverb.tick(silence), (-0.0000000516, -0.0008064000));
+        check_almost_equal(freeverb.tick(silence), (-0.0307050105, 0.0129637197));
+        check_almost_equal(freeverb.tick(silence), (-0.0245160013, -0.0000322560));
+        check_almost_equal(freeverb.tick(silence), (-0.0004032004, -0.0302464496));
+        check_almost_equal(freeverb.tick(silence), (-0.0000806401, -0.0060492903));
+    }
+
+    #[track_caller]
+    fn check_almost_equal(output: (f32, f32), expected: (f32, f32)) {
+        let difference = ((output.0 - expected.0).abs(), (output.1 - expected.1).abs());
+        let allowed_difference = 1.0e-10;
+
+        if difference.0 > allowed_difference || difference.1 > allowed_difference {
+            panic!(
+                "Value is not almost equal to the expected output:
+  output: {output:?}
+  expected: {expected:?}
+  allowed difference: {allowed_difference}
+  difference: {difference:?}
+                ",
+            )
+        }
     }
 }
