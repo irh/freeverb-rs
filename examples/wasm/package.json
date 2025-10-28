@@ -1,12 +1,10 @@
 {
   "scripts": {
-    "serve": "webpack serve --open"
+    "build": "cargo build --target wasm32-unknown-unknown --release && cp ../../target/wasm32-unknown-unknown/release/freeverb_wasm.wasm public",
+    "build-debug": "cargo build --target wasm32-unknown-unknown && cp ../../target/wasm32-unknown-unknown/debug/freeverb_wasm.wasm public",
+    "serve": "npm run build && http-server public -o"
   },
   "devDependencies": {
-    "@wasm-tool/wasm-pack-plugin": "^1.6.0",
-    "html-webpack-plugin": "^5.5.0",
-    "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.1",
-    "webpack-dev-server": "^4.13.2"
+    "http-server": "^14.1.1"
   }
 }

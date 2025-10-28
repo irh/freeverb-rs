@@ -5,8 +5,7 @@ authors = { workspace = true }
 edition = { workspace = true }
 
 [dependencies]
-freeverb = { path = "../../crates/freeverb" }
-wasm-bindgen = "0.2.104"
+freeverb-clib = { path = "../../crates/clib"}
 
 [lib]
 crate-type = ["cdylib"]

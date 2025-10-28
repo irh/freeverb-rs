@@ -8,4 +8,4 @@ edition = { workspace = true }
 freeverb = { path = "../freeverb" }
 
 [lib]
-crate-type = ["staticlib"]
+crate-type = ["staticlib", "rlib"]
