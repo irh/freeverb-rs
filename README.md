@@ -17,33 +17,33 @@ A difference from the original implementation is that delay line buffers are dyn
 
 ## Repo structure
 
-`src/freeverb/`
+[`crates/freeverb/`](./crates/freeverb)
 
 This contains the core implementation of Freeverb, with a simple interface.
 
-`src/audio_module`
+[`crates/audio_module`](./crates/audio_module)
 
 This contains a (very) experimental generic module+parameter library, which I really only added as an excuse to explore approaches to polymorphism. The `audio_module` approach is currently only used by `app_gtk`, it might go away in the future, or maybe I'll decide I like it and continue to work on it. At this point I don't know!
 
-`src/freeverb_module`
+[`crates/freeverb_module`](./crates/freeverb_module)
 
 The `freeverb` processor wrapped up as an `AudioModule`, currently only used by `app_gtk`.
 
-`src/clib`
+[`crates/clib`](./crates/clib)
 
 A static library that provides C bindings to the `freeverb::Freeverb` processor, used by app_juce.
 
-`examples/app_gtk`
+[`examples/app_gtk`](./examples/app_gtk)
 
 A very basic audio+GUI application that runs the `freeverb::Freeverb` processor.
 
 You will need `gtk4` installed on your system for this to work.
 
-`examples/app_juce`
+[`examples/app_juce`](./examples/app_juce)
 
 A very basic JUCE application that runs the `freeverb::Freeverb` processor via a statically linked library.
 
-`examples/wasm`
+[`examples/wasm`](./examples/wasm)
 
 A library that provides a `wasm-bindgen` interface to the `freeverb::Freeverb` processor.
 
