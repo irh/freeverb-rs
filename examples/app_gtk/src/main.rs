@@ -1,5 +1,5 @@
 use {
-    audio_module::{AudioModule, Widget},
+    audio_module::{AudioModule, ValueType},
     freeverb_module::FreeverbModule,
     gtk::{Application, ApplicationWindow, Orientation, prelude::*},
 };
@@ -46,11 +46,11 @@ fn run_main<Module: AudioModule>() {
 
         for id in 0..Module::parameter_count() {
             let parameter = Module::parameter(id);
-            let widget = match parameter.widget() {
-                Widget::Slider => {
+            let widget = match parameter.value_type() {
+                ValueType::Float => {
                     gtk_parameter_slider::make_slider(parameter, id, command_sender.clone())
                 }
-                Widget::Button => {
+                ValueType::Bool => {
                     gtk_parameter_toggle::make_toggle(parameter, id, command_sender.clone())
                 }
             };

@@ -7,17 +7,17 @@ use crate::{
     },
 };
 
-pub enum Widget {
-    Slider,
-    Button,
+pub enum ValueType {
+    Float,
+    Bool,
 }
 
 pub trait Parameter {
     fn name(&self) -> String;
     fn default_user_value(&self) -> f32;
 
-    fn widget(&self) -> Widget {
-        Widget::Slider
+    fn value_type(&self) -> ValueType {
+        ValueType::Float
     }
 
     fn make_value_converter(&self) -> Box<dyn ValueConverter> {
@@ -54,15 +54,11 @@ impl Parameter for BoolParameter {
     }
 
     fn default_user_value(&self) -> f32 {
-        if self.default_user_value {
-            1.0
-        } else {
-            0.0
-        }
+        if self.default_user_value { 1.0 } else { 0.0 }
     }
 
-    fn widget(&self) -> Widget {
-        Widget::Button
+    fn value_type(&self) -> ValueType {
+        ValueType::Bool
     }
 }
 
