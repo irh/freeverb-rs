@@ -1,6 +1,7 @@
 [package]
 name = "freeverb-gtk"
-version = { workspace = true }
+publish = false
+version = "0.1.0"
 authors = { workspace = true }
 edition = { workspace = true }
 
