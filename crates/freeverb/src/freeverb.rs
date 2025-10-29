@@ -237,13 +237,13 @@ mod tests {
         }
 
         // Check that the output is within a small difference of the reference
-        check_almost_equal(freeverb.tick(silence), (-0.0000064512, -0.0149999978));
-        check_almost_equal(freeverb.tick(silence), (0.0074987095, 0.0023400011));
-        check_almost_equal(freeverb.tick(silence), (0.0018747419, -0.0049695000));
-        check_almost_equal(freeverb.tick(silence), (-0.0000000516, -0.0008064000));
-        check_almost_equal(freeverb.tick(silence), (-0.0307050105, 0.0129637197));
-        check_almost_equal(freeverb.tick(silence), (-0.0245160013, -0.0000322560));
-        check_almost_equal(freeverb.tick(silence), (-0.0004032004, -0.0302464496));
+        check_almost_equal(freeverb.tick(silence), (-0.0000064512, -0.014999998));
+        check_almost_equal(freeverb.tick(silence), (0.0074987095, 0.002340001));
+        check_almost_equal(freeverb.tick(silence), (0.0018747419, -0.0049695));
+        check_almost_equal(freeverb.tick(silence), (-0.0000000516, -0.0008064));
+        check_almost_equal(freeverb.tick(silence), (-0.03070501, 0.01296372));
+        check_almost_equal(freeverb.tick(silence), (-0.024516001, -0.000032256));
+        check_almost_equal(freeverb.tick(silence), (-0.0004032004, -0.03024645));
         check_almost_equal(freeverb.tick(silence), (-0.0000806401, -0.0060492903));
     }
 
