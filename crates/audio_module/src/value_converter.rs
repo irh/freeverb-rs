@@ -1,3 +1,5 @@
+use crate::FloatParameter;
+
 pub trait ValueConverter {
     fn user_to_linear(&self, value: f32) -> f32;
     fn linear_to_user(&self, value: f32) -> f32;
@@ -61,4 +63,18 @@ impl ValueConverter for LogValueConverter {
     fn linear_to_user(&self, value: f32) -> f32 {
         (self.log_min_user_value + value * self.log_user_value_range).exp2()
     }
+}
+
+pub fn linear_value_converter(parameter: &FloatParameter) -> Box<dyn ValueConverter> {
+    Box::new(LinearValueConverter::new(
+        parameter.min_user_value,
+        parameter.max_user_value,
+    ))
+}
+
+pub fn log_value_converter(parameter: &FloatParameter) -> Box<dyn ValueConverter> {
+    Box::new(LogValueConverter::new(
+        parameter.min_user_value,
+        parameter.max_user_value,
+    ))
 }

@@ -1,3 +1,5 @@
+use crate::FloatParameter;
+
 pub trait StringConverter {
     fn to_string(&self, value: f32) -> String;
 }
@@ -44,4 +46,12 @@ impl StringConverter for PercentStringConverter {
     fn to_string(&self, value: f32) -> String {
         format!("{:.0} %", value * 100.0)
     }
+}
+
+pub fn float_string_converter(parameter: &FloatParameter) -> Box<dyn StringConverter> {
+    Box::new(FloatStringConverter::new(parameter.unit.clone()))
+}
+
+pub fn percent_string_converter(_: &FloatParameter) -> Box<dyn StringConverter> {
+    Box::new(PercentStringConverter {})
 }

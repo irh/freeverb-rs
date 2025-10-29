@@ -1,10 +1,6 @@
 use crate::{
-    string_converter::{
-        DefaultStringConverter, FloatStringConverter, PercentStringConverter, StringConverter,
-    },
-    value_converter::{
-        DefaultValueConverter, LinearValueConverter, LogValueConverter, ValueConverter,
-    },
+    string_converter::{DefaultStringConverter, StringConverter, float_string_converter},
+    value_converter::{DefaultValueConverter, ValueConverter, linear_value_converter},
 };
 
 pub enum ValueType {
@@ -134,31 +130,4 @@ impl Parameter for FloatParameter {
     fn make_string_converter(&self) -> Box<dyn StringConverter> {
         (self.string_converter_maker)(self)
     }
-}
-
-pub fn linear_value_converter(parameter: &FloatParameter) -> Box<dyn ValueConverter> {
-    Box::new(LinearValueConverter::new(
-        parameter.min_user_value,
-        parameter.max_user_value,
-    ))
-}
-
-pub fn log_value_converter(parameter: &FloatParameter) -> Box<dyn ValueConverter> {
-    Box::new(LogValueConverter::new(
-        parameter.min_user_value,
-        parameter.max_user_value,
-    ))
-}
-
-pub fn float_string_converter(parameter: &FloatParameter) -> Box<dyn StringConverter> {
-    Box::new(FloatStringConverter::new(parameter.unit.clone()))
-}
-
-pub fn percent_string_converter(_: &FloatParameter) -> Box<dyn StringConverter> {
-    Box::new(PercentStringConverter {})
-}
-
-pub trait ParameterProvider {
-    fn parameter_count() -> usize;
-    fn parameter(id: usize) -> Box<dyn Parameter>;
 }
