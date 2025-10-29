@@ -60,8 +60,9 @@ impl<T: Float> CommandHandler for FreeverbProcessor<T> {
 }
 
 impl<T: Float> AudioProcessor for FreeverbProcessor<T> {
-    fn process_stereo(&mut self, input: &[f32], output: &mut [f32]) {
-        assert!(input.len() == output.len());
+    fn process(&mut self, input: &[f32], output: &mut [f32], channels: u32) {
+        debug_assert_eq!(channels, 2);
+        debug_assert_eq!(input.len(), output.len());
 
         for i in (0..input.len()).step_by(2) {
             let result = self.freeverb.tick((input[i].into(), input[i + 1].into()));

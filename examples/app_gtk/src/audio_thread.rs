@@ -53,7 +53,7 @@ pub fn start_audio<Module: AudioModule>(
                     processor.handle_command(command);
                 }
 
-                processor.process_stereo(data, &mut process_buffer);
+                processor.process(data, &mut process_buffer, CHANNELS as u32);
 
                 to_output.push_slice(&process_buffer);
             },
